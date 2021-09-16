@@ -1,0 +1,121 @@
+<div class="center">
+    <div class="todo-container center">
+      <h2>Not done</h2>
+      <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="todoNotDone" [cdkDropListConnectedTo]="[todoList]"
+        class="todo-list" (cdkDropListDropped)="drop($event)">
+        <div *ngFor="let item of todoNotDone" cdkDrag>
+          <mat-card class="todo-card todo-card-drag">
+            <mat-card-title>{{item.title}}</mat-card-title>
+            <mat-card-content>{{item.description}}</mat-card-content>
+            <mat-card-content>DueDate: {{getFormatedDate(item.dueDate)}}</mat-card-content>
+            <div class="centerText centerBlock" style="margin: 0;" >
+              <mat-chip-list aria-label="Chips" class="mat-chip-list-stacked marginOverride">
+                
+                  <div *ngIf="item.tag == 0" class="centerText marginOverride">
+                    <mat-chip color="primary" selected class="marginOverride">
+                      <div class="centerText">
+                        <label>Frontend</label>
+                      </div>
+                    </mat-chip>
+                  </div>
+                  <div *ngIf="item.tag == 1" class="centerText">
+                    <mat-chip color="accent" selected>
+                      <div class="centerText">
+                        <label>Backend</label>
+                      </div>
+                    </mat-chip>
+                  </div>
+                  <div *ngIf="item.tag == 2" class="centerText">
+                    <mat-chip color="warn" selected>
+                      <div class="centerText">
+                        <label>Administration</label>
+                      </div>
+                    </mat-chip>
+                  </div>
+                  <div *ngIf="item.tag == 3" class="centerText">
+                    <mat-chip color="basic" selected class="colorBlue">
+                      <div class="centerText">
+                        <label>Other</label>
+                      </div>
+                    </mat-chip>
+                  </div>
+                
+              </mat-chip-list>
+            </div>
+            <button mat-flat-button (click)="[openEditDialog(item.id, item.title, item.description, item.status, item.dueDate, item.tag)]">
+              <mat-icon>edit</mat-icon>
+            </button>
+  
+            <button mat-flat-button (click)="[completeTask(item.id, item.title, item.description, item.dueDate, item.tag)]">
+              <mat-icon>done</mat-icon>
+            </button>
+  
+            <button mat-flat-button (click)="[deleteButton(item.id)]">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+    <div class="todo-container center">
+      <h2>Done</h2>
+      <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todoDone" [cdkDropListConnectedTo]="[doneList]"
+        class="todo-list" (cdkDropListDropped)="drop($event)">
+        <div *ngFor="let item of todoDone" cdkDrag>
+          <mat-card class="todo-card todo-card-drag">
+            
+            <mat-card-title>{{item.title}}</mat-card-title>
+            <mat-card-content>{{item.description}}</mat-card-content>
+            <mat-card-content>DueDate: {{getFormatedDate(item.dueDate)}}</mat-card-content>
+            <div class="centerText centerBlock" style="margin: 0;" >
+              <mat-chip-list aria-label="Chips" class="mat-chip-list-stacked marginOverride">
+                
+                  <div *ngIf="item.tag == 0" class="centerText marginOverride">
+                    <mat-chip color="primary" selected class="marginOverride">
+                      <div class="centerText">
+                        <label>Frontend</label>
+                      </div>
+                    </mat-chip>
+                  </div>
+                  <div *ngIf="item.tag == 1" class="centerText">
+                    <mat-chip color="accent" selected>
+                      <div class="centerText">
+                        <label>Backend</label>
+                      </div>
+                    </mat-chip>
+                  </div>
+                  <div *ngIf="item.tag == 2" class="centerText">
+                    <mat-chip color="warn" selected>
+                      <div class="centerText">
+                        <label>Administration</label>
+                      </div>
+                    </mat-chip>
+                  </div>
+                  <div *ngIf="item.tag == 3" class="centerText">
+                    <mat-chip color="basic" selected class="colorBlue">
+                      <div class="centerText">
+                        <label>Other</label>
+                      </div>
+                    </mat-chip>
+                  </div>
+                
+              </mat-chip-list>
+            </div>
+            <div>
+            <button mat-flat-button (click)="[openEditDialog(item.id, item.title, item.description, item.status, item.dueDate, item.tag)]">
+              <mat-icon>edit</mat-icon>
+            </button>
+  
+            <button mat-flat-button (click)="[completeTask(item.id, item.title, item.description, item.dueDate, item.tag)]">
+              <mat-icon>done</mat-icon>
+            </button>
+  
+            <button mat-flat-button (click)="[deleteButton(item.id)]">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
